@@ -1,121 +1,119 @@
 # FixMyCampus - Campus Issue Reporting System
 
-FixMyCampus is a comprehensive web application that allows students to report and track campus infrastructure issues. The system provides an intuitive interface for students to submit problems related to electricity, water, internet, furniture, cleanliness, and other campus facilities.
+FixMyCampus is a comprehensive web application designed to streamline the reporting and tracking of campus infrastructure issues. It empowers students to report problems (like electricity, water, internet) and allows administrators to manage and resolve them efficiently.
+
+
 
 ## Features
 
-- **User Authentication**: Secure login/signup system with password recovery
-- **Issue Reporting**: Submit detailed reports about campus infrastructure problems
-- **Issue Tracking**: Track the status of reported issues (Pending, In Progress, Resolved)
-- **User Profiles**: View and update personal information
-- **Dashboard**: Visual analytics of campus-wide issues
-- **Admin Panel**: Comprehensive management system for administrators
-- **Responsive Design**: Works seamlessly on mobile, tablet, and desktop devices
+- **User Authentication**: Secure Login/Signup using Roll Number authentication.
+- **Issue Reporting**: Students can report issues with type, description, and location.
+- **Issue Tracking**: Real-time status updates (Pending, In Progress, Resolved).
+- **Dashboard**:
+  - **Student**: View personal report history and status.
+  - **Admin**: Overview of all issues, statistics, and graphs.
+- **Admin Panel**:
+  - Manage Issues (Update status, Delete).
+  - User Management (Ban/Unban users).
+  - Audit Logs (Track admin actions).
+- **Responsive Design**: Mobile-friendly interface.
 
 ## Technical Stack
 
-- **Backend**: Python Flask
-- **Database**: MySQL
-- **Frontend**: HTML, Tailwind CSS, JavaScript
-- **Charts**: Chart.js
-- **Icons**: Font Awesome
+- **Backend**: Django 5.x.x (Python)
+- **Database**: SQLite3 (Default Django DB)
+- **Frontend**: HTML5, CSS3, and JavaScript 
+- **Styling**: `styles.css`, `index.css`
 
 ## Directory Structure
 
 ```
-/fix_my_campus
-|   admin.py
-|   app.py
-|   README.md
-|   requirements.txt
-|   File Structure.txt
+/FixMyCampus-1
+|   manage.py              # Django CLI utility
+|   requirements.txt       # Python dependencies
+|   README.md              # Project documentation
+|   db.sqlite3             # SQLite Database
 |   
-+---src
-|       index.css
++---FixMyCampus            # Project Configuration
+|       asgi.py
+|       settings.py        # Main settings
+|       urls.py            # Root URL routing
+|       wsgi.py
 |       
-+---static
-|   +---css
-|   |       styles.css
-|   |       
-|   \---js
-|           charts.js
-|           main.js
++---core                   # Main Application (App)
+|   |   admin.py
+|   |   apps.py
+|   |   models.py          # Database Models (User, Issue, AuditLog)
+|   |   urls.py            # App-specific URLs
+|   |   views.py           # Logic/Controllers
+|   |   ...
 |           
-\---templates
-    |   about.html
-    |   about_campus.html
-    |   change_password.html
-    |   forgot_password.html
-    |   help_support.html
-    |   home.html
-    |   issue_dashboard.html
-    |   login.html
-    |   my_issues.html
-    |   profile.html
-    |   report_issue.html
-    |   signup.html
-    |   
-    +---admin
-    |       audit_logs.html
-    |       dashboard.html
-    |       login.html
-    |       manage_issues.html
-    |       user_management.html
-    |       
-    +---components
-    |       footer.html
-    |       navbar.html
-    |       
++---static                 # Static Assets
+|   +---css
+|   \---js
+|           
+\---templates              # HTML Templates
+    |   base.html
+    |   ...
+    +---admin              # Admin templates
     \---layouts
-            base.html
-            
 ```
 
-## Installation
+## Installation & Setup
 
-1. Clone the repository:
-```
-git clone https://github.com/mehta-g1/fix-my-campus-1.git
-cd fix-my-campus
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Mehta-g1/Django_FixMyCampus.git
+   cd Django_FixMyCampus
+   ```
 
-2. Install dependencies:
-```
-pip install -r requirements.txt
-```
+2. **Create and Activate a Virtual Environment (Recommended):**
+   ```bash
+   python -m venv .venv
+   # Windows
+   .venv\Scripts\activate
+   # Mac/Linux
+   source .venv/bin/activate
+   ```
 
-3. Run the application:
-```
-python app.py
-```
+3. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. Run the admin panel (separate server):
-```
-python admin.py
-```
+4. **Apply Database Migrations:**
+   Initialize the SQLite database.
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
 
-## Database Setup
+5. **Create an Admin User:**
+   To access the Admin Dashboard, you need a user with staff privileges.
+   ```bash
+   python manage.py createsuperuser
+   ```
+   Follow the prompts to set the `Roll No` (acts as username), email, and password.
 
-The application is configured to use a MySQL database. The database connection details are set in the app.py file:
+6. **Run the Server:**
+   ```bash
+   python manage.py runserver
+   ```
+   Access the app at `http://127.0.0.1:8000/`.
 
-```python
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'your_sql_passwrod'
-app.config['MYSQL_DB'] = 'your_databasr_name'
-```
+## Usage
 
-## User Credentials
+### Student (Regular User)
+- **Sign Up**: Create a new account using your Roll Number.
+- **Login**: Access the dashboard to report issues or view status.
 
-For testing purposes:
-
-- **Regular User**:
-  - Create a new account through the signup page
-
-- **Admin**:
-  - Username: admin@1234
-  - Password: 123
+### Administrator
+- **Custom Admin Panel**:
+  - Go to `http://127.0.0.1:8000/admin/login/`
+  - Login with the credentials created via `createsuperuser`.
+- **Django Admin Interface**:
+  - Go to `http://127.0.0.1:8000/admin_django/` for raw database access.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
